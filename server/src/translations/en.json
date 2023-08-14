@@ -1,0 +1,15 @@
+{
+    "getCountries": {
+        "error": "An error occured while getting the list of countries"
+    },
+    "getCountryById": {
+        "error": "An error occured while getting the specified country"
+    },
+    "getActivities": {
+        "error": "An error occured while getting the list of activities"
+    },
+    "addActivity": {
+        "error": "An error occured while creating the activity",
+        "missingData": "The activity could not get created due to missing data."
+    }
+}
