@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 const { Country, Activity } = require("../../db");
 
-module.exports = async (name) => {
+module.exports = async (name, page) => {
   const includeArray = [
     {
       model: Activity,
@@ -12,11 +12,15 @@ module.exports = async (name) => {
     },
   ];
 
-  if (!name) return await Country.findAll({
+  const allCountries = await Country.findAll({
     include: includeArray,
   });
+  if (!name)
+    return page
+      ? allCountries.slice(page * 10 - 10, page * 10)
+      : allCountries;
 
-  return await Country.findAll({
+  const filteredCountries = await Country.findAll({
     where: {
       name: {
         [Op.iLike]: `%${name}%`,
@@ -24,4 +28,7 @@ module.exports = async (name) => {
     },
     include: includeArray,
   });
+  return page
+    ? filteredCountries.slice(page * 10 - 10, page * 10)
+    : filteredCountries;
 };
