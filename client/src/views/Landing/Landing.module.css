@@ -1,0 +1,45 @@
+.landingContainer {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  height: 300px;
+  width: 370px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(29, 56, 146, 0.685);
+  border-radius: 20px;
+}
+
+.title {
+  font-size: 30px;
+  color: white;
+  text-shadow: rgb(65, 65, 65) 2px 2px 2px;
+}
+
+.join {
+  width: 7rem;
+  height: 2.5rem;
+  margin-bottom: 40px;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: 2px;
+  background-color: rgba(48, 48, 48, 0.726);
+  color: white;
+  border-radius: 10px;
+  border: solid 2px rgb(107, 107, 107);
+  box-shadow: 1px 1px 4px rgba(44, 44, 44, 0.884);
+}
+
+.join:hover {
+  background-color: rgba(119, 119, 119, 0.726);
+  color: rgb(44, 44, 44);
+  border: solid 2px rgb(44, 44, 44);
+  cursor: pointer;
+}

@@ -1,0 +1,53 @@
+.countryContainer {
+  height: fit-content;
+  width: 250px;
+  position: relative;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(29, 29, 148, 0.678);
+  box-shadow: 4px 4px 8px rgba(32, 32, 32, 0.705);
+}
+
+.countryContainer:hover {
+  transform: scale(110%);
+}
+
+.flag {
+  width: 250px;
+}
+
+.textContainer {
+  height: 5em;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  margin: 0px;
+  background: linear-gradient(#7e7e7e00, #0f0f0f);
+  color: white;
+}
+
+.country,
+.continent {
+  position: relative;
+  bottom: 0px;
+  margin-top: 50px;
+  padding: 0px 10px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+.country p {
+  padding: 0px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.country:hover {
+  color: rgb(0, 247, 255);
+  text-shadow: #0f0f0f 2px 2px 2px;
+  cursor: pointer;
+}
