@@ -1,0 +1,29 @@
+.searchBarContainer {
+  width: fit-content;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.767);
+  border-radius: 8px;
+}
+
+.searchInput {
+  width: 200px;
+  border-radius: 8px 0px 0px 8px;
+  border-style: hidden;
+  text-indent: 10px;
+  outline: none;
+}
+
+.searchButton {
+  width: 40px;
+  background-color: #fff;
+  color: #555;
+  border-style: hidden;
+  border-radius: 0px 8px 8px 0px;
+}
+
+.searchButton:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}

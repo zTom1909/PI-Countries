@@ -1,10 +1,22 @@
 import SearchBar from "../SearchBar";
 import styles from "./Nav.module.css";
 
-const Nav = (props) => {
+const Nav = ({
+  setCountries,
+  page,
+  setMaxPages,
+  inputValue,
+  setInputValue,
+}) => {
   return (
     <div className={styles.navContainer}>
-      <SearchBar />
+      <SearchBar
+        setCountries={setCountries}
+        page={page}
+        setMaxPages={setMaxPages}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
     </div>
   );
 };
