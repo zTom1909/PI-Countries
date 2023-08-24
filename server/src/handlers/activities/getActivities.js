@@ -1,5 +1,24 @@
-const { Activity } = require("../../db");
+const { Activity, Country } = require("../../db");
+
 module.exports = async () => {
-  const activities = await Activity.findAll();
-  return activities;
+  return await Activity.findAll({
+    include: [
+      {
+        model: Country,
+        attributes: [
+          "id",
+          "name",
+          "image",
+          "region",
+          "subregion",
+          "capitalCity",
+          "area",
+          "population",
+        ],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
+  });
 };

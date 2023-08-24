@@ -1,33 +1,27 @@
-const axios = require("axios");
+const { Op } = require("sequelize");
+const { Country, Activity } = require("../../db");
+
 module.exports = async (name) => {
-  const { data } = await axios.get("http://localhost:5000/countries");
-  const filteredCountries = data.filter((country) => {
-    const countryName = country.name;
-    let foundCountry = false;
+  const includeArray = [
+    {
+      model: Activity,
+      attributes: ["id", "name", "difficulty", "season"],
+      through: {
+        attributes: [],
+      },
+    },
+  ];
 
-    if (countryName.common.toLowerCase().includes(name?.toLowerCase()))
-      foundCountry = true;
-    if (countryName.official.toLowerCase().includes(name?.toLowerCase()))
-      foundCountry = true;
-
-    countryName.nativeName &&
-      Object.keys(countryName.nativeName).forEach((lang) => {
-        if (
-          countryName.nativeName[lang].common
-            ?.toLowerCase()
-            .includes(name?.toLowerCase())
-        )
-          foundCountry = true;
-        if (
-          countryName.nativeName[lang].official
-            ?.toLowerCase()
-            .includes(name?.toLowerCase())
-        )
-          foundCountry = true;
-      });
-
-    return foundCountry;
+  if (!name) return await Country.findAll({
+    include: includeArray,
   });
-  const countries = name ? filteredCountries : data;
-  return countries;
+
+  return await Country.findAll({
+    where: {
+      name: {
+        [Op.iLike]: `%${name}%`,
+      },
+    },
+    include: includeArray,
+  });
 };

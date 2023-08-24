@@ -3,10 +3,14 @@ const translation = require("../../translations/en.json");
 
 const addActivity = async (req, res) => {
   const { name, difficulty, season } = req.body;
+  const { id } = req.query;
   try {
     if (!name || !difficulty || !season)
       throw new Error(translation.addActivity.missingData);
-    const newActivity = await addActivityHandler({ name, difficulty, season });
+    const newActivity = await addActivityHandler(
+      { name, difficulty, season },
+      id
+    );
     res.status(201).json(newActivity);
   } catch (error) {
     res

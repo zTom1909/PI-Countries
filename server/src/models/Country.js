@@ -19,19 +19,19 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    continent: {
+    region: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     capitalCity: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true
     },
-    region: {
+    subregion: {
       type: DataTypes.STRING,
     },
-    location: {
-      type: DataTypes.STRING,
+    area: {
+      type: DataTypes.FLOAT,
     },
     population: {
       type: DataTypes.INTEGER,
