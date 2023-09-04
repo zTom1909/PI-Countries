@@ -10,7 +10,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  overflow-y: hidden;
+  overflow-y: visible;
 }
 
 .pages {
@@ -23,8 +23,8 @@
   justify-content: space-between;
   background-color: #f0f8ff;
   border-radius: 10px;
-  box-shadow: 2px 2px 10px #161616a7, -2px 2px 10px #161616a7,
-    -2px -2px 10px #161616a7, 2px -2px 10px #161616a7;
+  box-shadow: 1px 1px 16px #1616167a, -1px 1px 16px #1616167a,
+    -1px -1px 16px #1616167a, 1px -1px 16px #1616167a;
 }
 
 .pageButton {

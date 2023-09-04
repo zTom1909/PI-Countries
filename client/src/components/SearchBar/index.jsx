@@ -4,6 +4,8 @@ import styles from "./SearchBar.module.css";
 const SearchBar = ({
   setCountries,
   page,
+  setPage,
+  maxPages,
   setMaxPages,
   inputValue,
   setInputValue,
@@ -12,12 +14,15 @@ const SearchBar = ({
     const request = await axios.get(
       `http://localhost:3001/countries?name=${inputValue}`
     );
-    setMaxPages(Math.ceil(request.data.length / 10));
+    const currentMaxPages = Math.ceil(request.data.length / 10)
+    setMaxPages(currentMaxPages);
 
     const { data } = await axios.get(
       `http://localhost:3001/countries?name=${inputValue}&page=${page}`
     );
     setCountries(data);
+    page > currentMaxPages && setPage(currentMaxPages);
+    page < 1 && currentMaxPages > 0 && setPage(1)
   };
   const handleInputChange = (event) => setInputValue(event.target.value);
   const handleKeyPress = ({ key }) => key === "Enter" && handleSearch();

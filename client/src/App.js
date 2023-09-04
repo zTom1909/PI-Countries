@@ -27,15 +27,17 @@ const App = () => {
       );
       setCountries(data);
     })();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   return (
-    <>
+    <div className={location.pathname === "/" ? "loginApp" : "App"}>
       {location.pathname !== "/" && (
         <Nav
           setCountries={setCountries}
           page={page}
+          setPage={setPage}
+          maxPages={maxPages}
           setMaxPages={setMaxPages}
           inputValue={inputValue}
           setInputValue={setInputValue}
@@ -57,7 +59,7 @@ const App = () => {
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/activity" element={<Form />} />
       </Routes>
-    </>
+    </div>
   );
 };
 

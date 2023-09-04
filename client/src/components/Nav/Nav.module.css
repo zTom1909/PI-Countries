@@ -1,5 +1,91 @@
 .navContainer {
-    margin-top: 10px;
+  height: 80px;
+  position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  background-color: #0000009c;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.767);
+}
+
+.back {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  left: 20px;
+  background-color: #fff;
+  color: #555;
+  border-radius: 8px;
+  border-style: hidden;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.767);
+}
+
+.back:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.order, .filter {
+  width: 120px;
+  position: absolute;
+  top: 25px;
+  z-index: 1;
+}
+
+.orderButton, .filterButton {
+  height: 30px;
+  width: 100%;
+  background-color: #fff;
+  color: #555;
+  font-weight: 600;
+  border-radius: 8px;
+  border-style: none;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.767);
+  z-index: 2;
+}
+
+.orderButton:hover, .filterButton:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.order {
+  right: 220px;
+}
+
+.filter {
+  right: 80px;
+}
+
+.options {
+  height: fit-content;
+  width: 100%;
+  top: -6px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+  padding-bottom: 6px;
+  background-color: #ddd;
+  border-radius: 0px 0px 8px 8px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.767);
+  z-index: 1;
+}
+
+.option {
+  width: 80%;
+  margin-top: 2px;
+  padding: 4px;
+  background-color: #ddd;
+  border-style: none;
+}
+
+.option:hover {
+  background-color: #aaa;
+  cursor: pointer;
+}
+
+.invisible {
+  display: none;
 }

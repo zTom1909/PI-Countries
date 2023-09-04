@@ -1,0 +1,80 @@
+.globalContainer {
+  height: 600px;
+  display: flex;
+  align-items: center;
+}
+
+.detailContainer {
+  width: fit-content;
+  height: fit-content;
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.726);
+  border-radius: 10px;
+}
+
+.imageContainer {
+  width: 420px;
+  height: 280px;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.582);
+  border-radius: 10px 0px 0px 10px;
+}
+
+.imageContainer img {
+  height: 280px;
+  width: 420px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.id {
+  width: 400px;
+  height: 70%;
+  position: absolute;
+  bottom: 0px;
+  margin: 0px;
+  padding: 10px;
+  line-height: 350px;
+  background: linear-gradient(
+    rgba(20, 20, 20, 0) 0%,
+    rgba(0, 0, 0, 0.712) 100%
+  );
+  color: rgb(255, 255, 255);
+  border-radius: 10px 0px 0px 10px;
+  font-weight: 600;
+  font-size: x-large;
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.507);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.textContainer {
+  width: 320px;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: rgba(114, 114, 114, 0.918);
+  background: linear-gradient(#977d5fe1 0%, #49351eb2 100%);
+  border-radius: 0px 10px 10px 0px;
+}
+
+.text {
+  margin: 5px;
+  margin-left: 20px;
+  padding: 10px;
+  background-color: rgba(255, 225, 127, 0.062);
+  color: #fff;
+  font-size: larger;
+  font-weight: 600;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.753);
+}
+
+.personSymbol {
+  font-size: medium;
+}

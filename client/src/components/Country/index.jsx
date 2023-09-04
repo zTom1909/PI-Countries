@@ -1,16 +1,24 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Country.module.css";
 
 const Country = ({ id, name, image, continent }) => {
+  const navigate = useNavigate();
+
   return (
     <div className={styles.countryContainer}>
-      <Link to={`/detail/${id}`}>
-        <img className={styles.flag} src={image} alt={name} />
-        <div className={styles.textContainer}>
-          <p className={styles.country}>{name}</p>
-          {/* <p className={styles.continent}>{continent}</p> */}
-        </div>
-      </Link>
+      <img
+        className={styles.flag}
+        src={image}
+        alt={name}
+        onClick={() => navigate(`/detail/${id}`)}
+      />
+      <button className={styles.addActivity}>+</button>
+      <div
+        className={styles.textContainer}
+        onClick={() => navigate(`/detail/${id}`)}
+      >
+        <p className={styles.country}>{name}</p>
+      </div>
     </div>
   );
 };

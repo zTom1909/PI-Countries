@@ -2,9 +2,20 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-image: url("resources/images/background.png");
+  overflow: hidden;
+}
+
+.App,
+.loginApp {
+  height: 100vh;
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  overflow: hidden;
+}
+
+.App {
+  background-image: url("resources/images/background.png");
+}
+.loginApp {
+  background-image: url("resources/images/flags.png");
 }
