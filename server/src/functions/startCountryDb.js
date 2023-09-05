@@ -3,7 +3,7 @@ const { countries } = require("../../api/db.json");
 module.exports = async () => {
   countries.forEach(async (country) => {
     const id = country.cioc ? country.cioc : country.cca3;
-    const name = country.name.official;
+    const name = country.name.common || country.name.official;
     const image = country.flags.png;
     const region = country.region;
     const subregion = country.subregion;
@@ -11,7 +11,7 @@ module.exports = async () => {
     const area = country.area;
     const population = country.population;
 
-    const [data, created] = await Country.findOrCreate({
+    await Country.findOrCreate({
       where: {
         id,
       },
