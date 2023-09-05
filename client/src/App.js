@@ -1,6 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import axios from "axios";
+import { addCountries } from "./redux/actions";
 import Landing from "./views/Landing";
 import Home from "./views/Home";
 import Detail from "./views/Detail";
@@ -10,52 +12,21 @@ import "./App.css";
 
 const App = () => {
   const location = useLocation();
-  const [countries, setCountries] = useState([]);
-  const [maxPages, setMaxPages] = useState(25);
-  const [page, setPage] = useState(1);
-  const [inputValue, setInputValue] = useState("");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     (async () => {
-      const request = await axios.get(
-        `http://localhost:3001/countries?name=${inputValue}`
-      );
-      setMaxPages(Math.ceil(request.data.length / 10));
-
-      const { data } = await axios.get(
-        `http://localhost:3001/countries?name=${inputValue}&page=${page}`
-      );
-      setCountries(data);
+      const { data } = await axios.get(`http://localhost:3001/countries`);
+      dispatch(addCountries(data));
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [dispatch]);
 
   return (
     <div className={location.pathname === "/" ? "loginApp" : "App"}>
-      {location.pathname !== "/" && (
-        <Nav
-          setCountries={setCountries}
-          page={page}
-          setPage={setPage}
-          maxPages={maxPages}
-          setMaxPages={setMaxPages}
-          inputValue={inputValue}
-          setInputValue={setInputValue}
-        />
-      )}
+      {location.pathname !== "/" && <Nav />}
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route
-          path="/home"
-          element={
-            <Home
-              countries={countries}
-              page={page}
-              setPage={setPage}
-              maxPages={maxPages}
-            />
-          }
-        />
+        <Route path="/home" element={<Home />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/activity" element={<Form />} />
       </Routes>

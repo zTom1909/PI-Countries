@@ -3,15 +3,7 @@ import SearchBar from "../SearchBar";
 import styles from "./Nav.module.css";
 import { useState } from "react";
 
-const Nav = ({
-  setCountries,
-  page,
-  setPage,
-  maxPages,
-  setMaxPages,
-  inputValue,
-  setInputValue,
-}) => {
+const Nav = () => {
   const [isPressed, setIsPressed] = useState({
     order: false,
     filter: false,
@@ -23,21 +15,11 @@ const Nav = ({
       <button className={styles.back} onClick={() => navigate(-1)}>
         <i className="fa-solid fa-reply" />
       </button>
-      <SearchBar
-        setCountries={setCountries}
-        page={page}
-        setPage={setPage}
-        maxPages={maxPages}
-        setMaxPages={setMaxPages}
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-      />
+      <SearchBar />
       <div className={styles.order}>
         <button
           className={styles.orderButton}
-          onClick={() =>
-            setIsPressed({ order: !isPressed.order })
-          }
+          onClick={() => setIsPressed({ order: !isPressed.order })}
         >
           Order Byㅤ
           {isPressed.order ? (
@@ -56,9 +38,7 @@ const Nav = ({
       <div className={styles.filter}>
         <button
           className={styles.filterButton}
-          onClick={() =>
-            setIsPressed({ filter: !isPressed.filter })
-          }
+          onClick={() => setIsPressed({ filter: !isPressed.filter })}
         >
           Filter Byㅤ
           {isPressed.filter ? (
