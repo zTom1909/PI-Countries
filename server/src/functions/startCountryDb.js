@@ -5,7 +5,7 @@ module.exports = async () => {
     const id = country.cioc ? country.cioc : country.cca3;
     const name = country.name.common || country.name.official;
     const image = country.flags.png;
-    const region = country.region;
+    const region = country.continents[0];
     const subregion = country.subregion;
     const capitalCity = country.capital?.length ? country.capital[0] : "none";
     const area = country.area;
