@@ -1,8 +1,7 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
-import { addCountries } from "./redux/actions";
+import { setCountries } from "./redux/actions";
 import Landing from "./views/Landing";
 import Home from "./views/Home";
 import Detail from "./views/Detail";
@@ -13,20 +12,18 @@ import "./App.css";
 const App = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const [aux, setAux] = useState(false);
 
   useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(`http://localhost:3001/countries`);
-      dispatch(addCountries(data));
-    })();
+    dispatch(setCountries(""));
   }, [dispatch]);
 
   return (
     <div className={location.pathname === "/" ? "loginApp" : "App"}>
-      {location.pathname !== "/" && <Nav />}
+      {location.pathname !== "/" && <Nav aux={aux} setAux={setAux} />}
       <Routes>
         <Route path="/" element={<Landing />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Home aux={aux} />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/activity" element={<Form />} />
       </Routes>

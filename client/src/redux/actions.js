@@ -1,15 +1,26 @@
-import { GET_COUNTRIES, ADD_COUNTRIES, FILTER_COUNTRIES } from "./types";
+import { SET_COUNTRIES, FILTER_COUNTRIES, ORDER_COUNTRIES } from "./types";
+import axios from "axios";
 
-export const getCountries = () => ({
-  type: GET_COUNTRIES,
-});
+export const setCountries = (searchInput) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(
+      `http://localhost:3001/countries?name=${searchInput}`
+    );
+    return dispatch({
+      type: SET_COUNTRIES,
+      payload: data,
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
 
-export const addCountries = (countries) => ({
-  type: ADD_COUNTRIES,
-  payload: countries,
-});
-
-export const filterCountries = (countries, filterType, filterInfo) => ({
+export const filterCountries = (filters) => ({
   type: FILTER_COUNTRIES,
-  payload: { countries, filterType, filterInfo },
+  payload: filters,
+});
+
+export const orderCountries = (order) => ({
+  type: ORDER_COUNTRIES,
+  payload: order,
 });

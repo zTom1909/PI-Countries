@@ -1,21 +1,18 @@
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import Country from "../Country";
 import styles from "./Home.module.css";
-import { useEffect, useState } from "react";
 
-const Home = () => {
+const Home = ({ aux }) => {
   const [page, setPage] = useState(1);
-
   const filteredCountries = useSelector((state) => state.filteredCountries);
-
   const countries = filteredCountries.slice(page * 10 - 10, page * 10);
   const maxPages = Math.ceil(filteredCountries.length / 10);
 
   useEffect(() => {
     page > maxPages && setPage(maxPages);
     page < 1 && maxPages > 0 && setPage(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countries, maxPages]);
+  }, [aux, page, maxPages]);
 
   const handlePage = (event) => {
     const type = event.target.name;
