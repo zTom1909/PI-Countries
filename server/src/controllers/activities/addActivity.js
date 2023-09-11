@@ -2,13 +2,13 @@ const addActivityHandler = require("../../handlers/activities/addActivity");
 const translation = require("../../translations/en.json");
 
 const addActivity = async (req, res) => {
-  const { name, difficulty, season } = req.body;
+  const { name, difficulty, duration, season } = req.body;
   const { id, email } = req.query;
   try {
     if (!name || !difficulty || !season)
       throw new Error(translation.addActivity.missingData);
     const newActivity = await addActivityHandler(
-      { name, difficulty, season },
+      { name, difficulty, duration, season },
       id,
       email
     );

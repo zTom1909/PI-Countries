@@ -1,7 +1,11 @@
 const { User, Activity, Country } = require("../../db");
 
-module.exports = async () => {
+module.exports = async ({ difficulty, season }) => {
+  let filters = {}
+  if (difficulty) filters.difficulty = difficulty
+  if (season) filters.season = season
   return await Activity.findAll({
+    where: filters,
     include: [
       {
         model: Country,
@@ -21,10 +25,7 @@ module.exports = async () => {
       },
       {
         model: User,
-        attributes: [
-          "id",
-          "email",
-        ],
+        attributes: ["id", "email"],
         through: {
           attributes: [],
         },

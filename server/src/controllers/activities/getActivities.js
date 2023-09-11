@@ -3,7 +3,8 @@ const translation = require("../../translations/en.json");
 
 const getActivities = async (req, res) => {
   try {
-    const activities = await getActivitiesHandler();
+    const { difficulty, season } = req.query;
+    const activities = await getActivitiesHandler({ difficulty, season });
     res.status(200).json(activities);
   } catch (error) {
     res

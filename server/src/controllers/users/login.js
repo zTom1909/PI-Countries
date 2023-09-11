@@ -10,9 +10,9 @@ const login = async (req, res) => {
   } catch (error) {
     switch (error.message) {
       case "User not found":
-        return res.status(404).json({ error: error.message });
+        return res.status(404).json({ error: "User not found" });
       case "Wrong password":
-        return res.status(403).json({ error: error.message });
+        return res.status(403).json({ error: "Wrong password!" });
       default:
         return res.status(500).json({ error: error.message });
     }
