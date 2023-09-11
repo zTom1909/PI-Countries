@@ -1,0 +1,192 @@
+.formContainer {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  animation: ease-in-form 0.4s linear;
+}
+
+.activity {
+  height: 400px;
+  width: 30%;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(112, 167, 148, 0.904);
+  border-radius: 20px;
+  box-shadow: 4px 4px 20px black;
+}
+
+.title {
+  font-size: x-large;
+  padding: 10px 40px;
+  background-color: rgba(168, 219, 202, 0.719);
+  border-radius: 8px;
+  color: rgb(2, 26, 18);
+}
+
+.inputContainer {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+}
+
+.seasonContainer {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label {
+  font-size: larger;
+}
+
+.input {
+  height: 25px;
+  margin-top: 5px;
+  background-color: #a8dbcab7;
+  color: rgb(3, 34, 3);
+  text-indent: 10px;
+  outline: none;
+  border-style: hidden;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.duration {
+  height: 20px;
+  width: 50px;
+  background-color: rgba(168, 219, 202, 0.719);
+  color: rgb(3, 34, 3);
+  outline: none;
+  border-style: hidden;
+  border-radius: 8px;
+  text-align: center;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.sliderContainer,
+.combinedContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider {
+  width: 140px;
+  background-color: transparent;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 20px;
+  padding: 0px 10px;
+  background-color: rgb(51, 110, 91);
+  border-radius: 8px;
+}
+
+.slider::-webkit-slider-thumb {
+  height: 25px;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.difficultyContainer {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.difficultyValue {
+  margin-right: 4px;
+  font-weight: 700;
+  font-size: large;
+  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.521));
+}
+
+.difficultyStar {
+  /* color: goldenrod; */
+  filter: drop-shadow(1px 1px 2px black);
+}
+
+.dif1 {
+  color: rgb(31, 170, 49);
+}
+
+.dif2 {
+  color: rgb(115, 168, 30);
+}
+
+.dif3 {
+  color: rgb(170, 179, 47);
+}
+
+.dif4 {
+  color: rgb(179, 132, 33);
+}
+
+.dif5 {
+  color: rgb(153, 18, 18);
+}
+
+.season {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  border-style: none;
+  cursor: pointer;
+}
+
+.season i {
+  padding: 0px;
+  margin: 0px;
+  font-size: larger;
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.6));
+}
+
+.isSummer {
+  color: goldenrod;
+}
+
+.isNotSummer {
+  color: rgb(204, 186, 142);
+}
+
+.isAutumn {
+  color: rgb(124, 75, 39);
+}
+
+.isNotAutumn {
+  color: rgb(180, 170, 162);
+}
+
+.isWinter {
+  color: aquamarine;
+}
+
+.isNotWinter {
+  color: rgb(180, 202, 195);
+}
+
+.isSpring {
+  color: rgb(53, 151, 50);
+}
+
+.isNotSpring {
+  color: rgb(160, 197, 158);
+}
+
+@keyframes ease-in-form {
+  0% {
+    opacity: 0.2;
+    transform: scale(90%);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(100%);
+  }
+}

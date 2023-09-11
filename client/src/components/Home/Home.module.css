@@ -58,3 +58,32 @@
   color: #555;
   font-weight: 800;
 }
+
+.socialsContainer {
+  width: 100px;
+  display: flex;
+  position: fixed;
+  left: 40px;
+  bottom: 20px;
+}
+
+.socials {
+  height: 30px;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.socials a {
+  text-decoration: none;
+  color: white;
+}
+
+.socials i {
+  font-size: x-large;
+  filter: drop-shadow(2px 2px 6px black);
+}
+
+.socials a:hover {
+  color: #ccc;
+  cursor: pointer;
+}

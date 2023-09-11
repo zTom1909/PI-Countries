@@ -1,5 +1,10 @@
-import { SET_COUNTRIES, FILTER_COUNTRIES, ORDER_COUNTRIES } from "./types";
+import { SET_COUNTRIES, FILTER_COUNTRIES, ORDER_COUNTRIES, SET_ACCESS } from "./types";
 import axios from "axios";
+
+export const setAccess = (access) => ({
+  type: SET_ACCESS,
+  payload: access
+})
 
 export const setCountries = (searchInput) => async (dispatch) => {
   try {

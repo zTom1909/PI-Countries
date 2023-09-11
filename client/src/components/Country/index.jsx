@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./Country.module.css";
 
-const Country = ({ id, name, image, continent }) => {
+const Country = ({ id, name, image, continent, position }) => {
   const navigate = useNavigate();
 
   return (
@@ -12,7 +12,8 @@ const Country = ({ id, name, image, continent }) => {
         alt={name}
         onClick={() => navigate(`/detail/${id}`)}
       />
-      <button className={styles.addActivity}>+</button>
+      <h2 className={position < 5 ? styles.continentUp : styles.continentDown}>{continent}</h2>
+      {/* <button className={styles.addActivity}>+</button> */}
       <div
         className={styles.textContainer}
         onClick={() => navigate(`/detail/${id}`)}

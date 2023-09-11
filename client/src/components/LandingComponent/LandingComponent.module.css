@@ -1,0 +1,227 @@
+.accessContainer {
+  height: 420px;
+  width: 400px;
+  margin-top: 50px;
+  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  left: 70px;
+  background-color: rgba(56, 56, 56, 0.829);
+  border-radius: 6px;
+  animation: ease-in-form 1s linear;
+}
+
+.headerImage {
+  height: 120px;
+  width: 120px;
+  top: -70px;
+  left: 140px;
+  position: absolute;
+  background-color: #042441;
+  color: #035aa6;
+  font-size: 120px;
+  line-height: 0px;
+  border-radius: 50%;
+  box-shadow: 2px 2px 10px black;
+}
+
+.inputContainer {
+  height: 40px;
+  width: 320px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.486);
+}
+
+.logoContainer,
+.visiblePassword {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #042441;
+  color: #035aa6;
+}
+
+.visiblePassword {
+  cursor: pointer;
+}
+
+.clearInput,
+.clearInputPassword {
+  height: 20px;
+  width: 20px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  font-size: large;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.clearInput {
+  right: 50px;
+}
+
+.clearInputPassword {
+  right: 90px;
+}
+
+.clearInput:hover,
+.clearInputPassword:hover {
+  color: rgb(100, 9, 9);
+}
+
+.inputContainer:focus-within .clearInput,
+.inputContainer:focus-within .clearInputPassword {
+  opacity: 1;
+  pointer-events: auto;
+}
+.warning {
+  height: 40px;
+  width: 40px;
+  right: 5px;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  color: goldenrod;
+}
+
+.input,
+.inputPassword {
+  height: 40px;
+  padding: 0px;
+  background-color: rgb(236, 236, 236);
+  text-indent: 10px;
+  font-size: larger;
+  outline: none;
+  border-style: hidden;
+}
+
+.input {
+  width: 280px;
+}
+
+.inputPassword {
+  width: 240px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.changeFormContainer {
+  height: 20px;
+  width: 290px;
+  margin: 20px 0px;
+  padding: 5px;
+  top: -10px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  background-color: #2a7dc552;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 8px;
+  overflow: visible;
+}
+
+.changeFormText {
+  margin-right: 10px;
+}
+
+.changeFormLink {
+  cursor: pointer;
+  color: rgb(21, 241, 186);
+}
+
+.changeFormLink:hover {
+  color: rgb(13, 145, 112);
+}
+
+.submitSection {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  align-items: center;
+  bottom: 20px;
+}
+
+.submit {
+  height: 40px;
+  width: 300px;
+  background-color: #035aa6;
+  color: white;
+  font-weight: 700;
+  letter-spacing: 1px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.486);
+  border-style: hidden;
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #023f74;
+}
+
+.orText {
+  height: 25px;
+  margin: 10px;
+  color: white;
+  font-weight: 500;
+}
+
+.bubble,
+.pointer {
+  opacity: 0;
+}
+
+.warning:hover .bubble,
+.warning:hover .pointer {
+  opacity: 1;
+}
+
+.bubble {
+  top: -28px;
+  left: 8px;
+  padding: 5px;
+  position: absolute;
+  background-color: rgba(15, 15, 15, 0.918);
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: small;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.pointer {
+  height: 20px;
+  width: 20px;
+  left: 12px;
+  bottom: 39px;
+  position: absolute;
+  transform: rotate(45deg);
+  background-color: rgba(15, 15, 15, 0.918);
+  z-index: 1;
+}
+
+@keyframes ease-in-form {
+  from {
+    left: -100px;
+    opacity: 0;
+  }
+  to {
+    left: 70px;
+    opacity: 1;
+  }
+}

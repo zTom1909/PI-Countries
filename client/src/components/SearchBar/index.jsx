@@ -1,13 +1,18 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { setCountries } from "../../redux/actions";
 import styles from "./SearchBar.module.css";
 
 const SearchBar = () => {
   const [inputValue, setInputValue] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleSearch = async () => dispatch(setCountries(inputValue));
+  const handleSearch = async () => {
+    dispatch(setCountries(inputValue));
+    navigate("/home");
+  };
   const handleInputChange = (event) => setInputValue(event.target.value);
   const handleKeyPress = ({ key }) => key === "Enter" && handleSearch();
 

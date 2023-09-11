@@ -4,16 +4,19 @@
   display: flex;
   align-items: center;
   margin: 20px;
-  filter: drop-shadow(4px 4px 8px rgba(32, 32, 32, 0.705));
-  transition: all 0.1s ease-in;
+  filter: drop-shadow(4px 4px 8px rgba(32, 32, 32, 0.705)) grayscale(60%);
+  transition:
+    transform 0.5s,
+    filter 0.5s;
 }
 
 .countryContainer:hover {
-  transform: scale(110%);
+  transform: scale(130%);
+  filter: drop-shadow(4px 4px 8px rgba(0, 100, 150, 0.705)) grayscale(0%);
   cursor: pointer;
 }
-.countryContainer:hover .addActivity {
-  display: block;
+.countryContainer:hover .textContainer {
+  opacity: 1;
 }
 
 .flag {
@@ -24,6 +27,39 @@
   z-index: 1;
 }
 
+.continentUp, .continentDown {
+  width: 100%;
+  margin: 0px;
+  opacity: 0;
+  color: rgb(236, 236, 236);
+  text-align: center;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.452);
+  transition: 
+    top 0.5s,
+    bottom 0.5s,
+    opacity 0.5s 0.3s;
+}
+
+.continentUp {
+  position: absolute;
+  top: 0px;
+}
+
+.countryContainer:hover .continentUp {
+  top: -30px;
+  opacity: 1;
+}
+
+.continentDown {
+  position: absolute;
+  bottom: 0px;
+}
+
+.countryContainer:hover .continentDown {
+  bottom: -30px;
+  opacity: 1;
+}
+
 .textContainer {
   height: 70%;
   width: 100%;
@@ -32,17 +68,22 @@
   margin: 0px;
   color: white;
   overflow: hidden;
+  opacity: 0;
   z-index: 2;
+  transition:
+    opacity 0.4s 0.2s;
 }
 
-.country,
-.continent {
-  width: 200px;
+.country {
+  width: 95%;
   position: absolute;
   bottom: 0px;
   margin: 0px;
   padding: 0px 5px 10px;
   color: white;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: 1px;
   text-decoration: none;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.829);
   white-space: nowrap;
@@ -59,7 +100,7 @@
   top: 50%;
   left: 50%;
   padding: 0;
-  background-color: rgba(161, 161, 161, 0.753);
+  background-color: rgba(212, 212, 212, 0.459);
   color: rgb(80, 80, 80);
   border: none;
   border-radius: 20%;

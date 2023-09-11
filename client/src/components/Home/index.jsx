@@ -32,8 +32,9 @@ const Home = ({ aux }) => {
     <div className={styles.homeContainer}>
       <div className={styles.countriesContainer}>
         {countries[0] &&
-          countries.map(({ id, name, image, region }) => (
+          countries.map(({ id, name, image, region }, i) => (
             <Country
+              position={i}
               key={id}
               id={id}
               name={name}
@@ -41,6 +42,26 @@ const Home = ({ aux }) => {
               continent={region}
             />
           ))}
+      </div>
+      <div className={styles.socialsContainer}>
+        <span className={styles.socials}>
+          <a
+            href="https://github.com/zTom1909/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fa-brands fa-github" />
+          </a>
+        </span>
+        <span className={styles.socials}>
+          <a
+            href="https://www.linkedin.com/in/tomas-iglesias-99b5a6231/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i className="fa-brands fa-linkedin" />
+          </a>
+        </span>
       </div>
       <div className={styles.pages}>
         <button

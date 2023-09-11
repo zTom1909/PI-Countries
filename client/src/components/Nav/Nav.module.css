@@ -1,18 +1,51 @@
 .navContainer {
-  height: 80px;
+  height: 100px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #0000009c;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.767);
+}
+
+.title {
+  position: absolute;
+  margin: 0px;
+  left: 90px;
+  color: rgb(214, 255, 255);
+  letter-spacing: 4px;
+  text-shadow: 2px 2px 2px rgb(1, 27, 34);
+  animation: fade-in-title 1s linear;
 }
 
 .back {
+  left: 20px;
   width: 30px;
+}
+
+.home {
+  right: 30px;
+  width: 30px;
+}
+
+.activity {
+  width: 100px;
+  right: 360px;
+  font-weight: 700;
+  text-align: start;
+  text-indent: 2px;
+}
+
+.activity i {
+  margin-right: 5px;
+}
+
+.activity:hover i {
+  color: rgb(65, 160, 65);
+}
+
+.button {
   height: 30px;
   position: absolute;
-  left: 20px;
   background-color: #fff;
   color: #555;
   border-radius: 8px;
@@ -20,7 +53,7 @@
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.767);
 }
 
-.back:hover {
+.button:hover {
   background-color: #ccc;
   cursor: pointer;
 }
@@ -29,7 +62,7 @@
 .filter {
   width: 120px;
   position: absolute;
-  top: 25px;
+  top: 35px;
   z-index: 1;
 }
 
@@ -109,7 +142,8 @@
   border-radius: 0px 0px 8px 0px;
 }
 
-.option {
+.option,
+.continentOption {
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -121,15 +155,21 @@
 }
 
 .option:hover,
+.continentOption:hover,
 .option1:hover .difficultyStar,
 .lastOptionFilter:hover .season {
   background-color: #ccc;
   cursor: pointer;
 }
 
-.option i {
+.option i,
+.continentOption i {
   margin-right: 5px;
   padding: 3px;
+}
+
+.continentOption i {
+  color: rgb(43, 53, 117);
 }
 
 .filterContainer {
@@ -164,7 +204,7 @@
 .difficultyStar i {
   padding: 0px;
   margin: 0px;
-  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.6))
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.6));
 }
 
 .season {
@@ -180,7 +220,8 @@
 .season i {
   padding: 0px;
   margin: 0px;
-  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.6))
+  font-size: larger;
+  filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.6));
 }
 
 .isSummer {
@@ -217,4 +258,15 @@
 
 .invisible {
   display: none;
+}
+
+@keyframes fade-in-title {
+  0% {
+    opacity: 0;
+    top: 40px;
+  }
+  100% {
+    opacity: 1;
+    top: 30px;
+  }
 }

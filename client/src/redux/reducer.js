@@ -1,11 +1,15 @@
-import { SET_COUNTRIES, FILTER_COUNTRIES, ORDER_COUNTRIES } from "./types";
+import { SET_COUNTRIES, FILTER_COUNTRIES, ORDER_COUNTRIES, SET_ACCESS } from "./types";
 const initialState = {
   allCountries: [],
   filteredCountries: [],
+  access: false
 };
 
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case SET_ACCESS:
+      return { ...state, access: payload }
+
     case SET_COUNTRIES:
       return { ...state, allCountries: payload, filteredCountries: payload };
 

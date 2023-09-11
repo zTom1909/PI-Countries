@@ -1,9 +1,10 @@
+import FormComponent from "../../components/FormComponent"
 import styles from "./Form.module.css";
 
-const Form = (props) => {
+const Form = () => {
   return (
     <div className={styles.formContainer}>
-      <h1>Form</h1>
+      <FormComponent />
     </div>
   );
 };

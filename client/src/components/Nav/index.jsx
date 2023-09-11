@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import SearchBar from "../SearchBar";
-import { filterCountries, orderCountries } from "../../redux/actions";
+import { filterCountries, orderCountries, setAccess } from "../../redux/actions";
 import styles from "./Nav.module.css";
 
 const Nav = ({ setAux, aux }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [isPressed, setIsPressed] = useState({
     order: false,
@@ -19,6 +20,11 @@ const Nav = ({ setAux, aux }) => {
     difficulty: 0,
   });
 
+  const handleLogout = () => {
+    dispatch(setAccess(false))
+    navigate("/")
+  }
+  
   const handleDispatch = (action, payload) => {
     dispatch(action(payload));
     setAux(!aux);
@@ -57,10 +63,22 @@ const Nav = ({ setAux, aux }) => {
 
   return (
     <div className={styles.navContainer}>
-      <button className={styles.back} onClick={() => navigate(-1)}>
+      <button
+        className={`${styles.button} ${styles.back}`}
+        onClick={handleLogout}
+      >
         <i className="fa-solid fa-reply" />
       </button>
+      <h1 className={styles.title}>NATION-TALES</h1>
       <SearchBar />
+      {location.pathname !== "/activity" && (
+        <button
+          className={`${styles.button} ${styles.activity}`}
+          onClick={() => navigate("/activity")}
+        >
+          <i className="fa-solid fa-circle-plus" /> Activity
+        </button>
+      )}
       <div className={styles.order}>
         <button
           className={`${styles.orderButton} ${
@@ -152,37 +170,37 @@ const Nav = ({ setAux, aux }) => {
             }
           >
             <button
-              className={`${styles.option} ${styles.option1}`}
+              className={`${styles.continentOption} ${styles.option1}`}
               onClick={() => handleContinentFilter("North America")}
             >
               <i className="fa-solid fa-earth-americas" /> North America
             </button>
             <button
-              className={styles.option}
+              className={styles.continentOption}
               onClick={() => handleContinentFilter("South America")}
             >
               <i className="fa-solid fa-earth-americas" /> South America
             </button>
             <button
-              className={styles.option}
+              className={styles.continentOption}
               onClick={() => handleContinentFilter("Europe")}
             >
               <i className="fa-solid fa-earth-europe" /> Europe
             </button>
             <button
-              className={styles.option}
+              className={styles.continentOption}
               onClick={() => handleContinentFilter("Asia")}
             >
               <i className="fa-solid fa-earth-asia" /> Asia
             </button>
             <button
-              className={styles.option}
+              className={styles.continentOption}
               onClick={() => handleContinentFilter("Africa")}
             >
               <i className="fa-solid fa-earth-africa" /> Africa
             </button>
             <button
-              className={`${styles.option} ${styles.lastOptionFilter}`}
+              className={`${styles.continentOption} ${styles.lastOptionFilter}`}
               onClick={() => handleContinentFilter("Oceania")}
             >
               <i className="fa-solid fa-earth-oceania" /> Oceania
@@ -363,6 +381,12 @@ const Nav = ({ setAux, aux }) => {
           </div>
         </div>
       </div>
+      <button
+        className={`${styles.button} ${styles.home}`}
+        onClick={() => navigate("/home")}
+      >
+        <i className="fa-solid fa-house" />
+      </button>
     </div>
   );
 };
