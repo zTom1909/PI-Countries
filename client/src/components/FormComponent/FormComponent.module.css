@@ -44,7 +44,8 @@
   font-size: larger;
 }
 
-.input {
+.input,
+.inputCountry {
   height: 25px;
   margin-top: 5px;
   background-color: #a8dbcab7;
@@ -67,6 +68,82 @@
   text-align: center;
   letter-spacing: 1px;
   font-weight: 600;
+}
+
+.inputCountry {
+  margin: 0px;
+  background-color: transparent;
+}
+
+.countriesContainer {
+  display: flex;
+  align-items: center;
+  padding: 2px 4px;
+  background-color: #a8dbcab7;
+  border-radius: 8px;
+  overflow-x: scroll;
+}
+
+.country {
+  height: 20px;
+  margin-right: 5px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  background-color: #263d35b7;
+  color: white;
+  font-size: small;
+  font-weight: 500;
+  border-radius: 8px;
+}
+
+.country img {
+  height: 12px;
+  margin-right: 5px;
+  padding-left: 5px;
+}
+
+.country p {
+  margin: 0px;
+  margin-right: 8px;
+}
+
+.country span {
+  margin-right: 5px;
+  font-size: smaller;
+  cursor: pointer;
+}
+
+.country span:hover {
+  color: #ccc;
+}
+
+::-webkit-scrollbar {
+  height: 8px;
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #263d35b7;
+}
+
+
+.submit {
+  padding: 10px;
+  background-color: #a8dbcab7;
+  color: rgb(2, 26, 18);
+  font-weight: 700;
+  letter-spacing: 1px;
+  border-style: hidden;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.63);
+  cursor: pointer;
+}
+
+.submit:hover {
+  background-color: #94cab8b7;
 }
 
 .sliderContainer,

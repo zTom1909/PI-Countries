@@ -1,27 +1,107 @@
+import axios from "axios";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import validate from "../../resources/functions/activityValidate";
+import { setCountries } from "../../redux/actions";
 import styles from "./FormComponent.module.css";
 
 const FormComponent = () => {
+  const email = useSelector((state) => state.email);
+  const dispatch = useDispatch()
+
   const [activityData, setActivityData] = useState({
     name: "",
     difficulty: 1,
     duration: "",
-    season: "Summer",
+    season: "Verano",
+    countries: [],
+    countriesSearchbar: "",
+  });
+
+  const [, setErrors] = useState({
+    name: "",
+    duration: "",
     countries: "",
   });
-  const [isPressed, setIsPressed] = useState("summer");
+
+  const createActivity = async (data) => {
+    try {
+      if (!email) return alert("You need an account to create activities!")
+      const durationArray = data.duration.split(":");
+      const fixedDuration =
+        Number(durationArray[0]) * 60 + Number(durationArray[1]);
+      const fixedIds = data.countries.map((country) => country.id).join(",");
+      console.log(fixedDuration);
+      await axios.post(
+        `http://localhost:3001/activities?id=${fixedIds}&email=${email}`,
+        {
+          name: data.name,
+          difficulty: data.difficulty,
+          duration: fixedDuration,
+          season: data.season,
+        }
+      );
+      alert("Activity created succesfully");
+      setActivityData({
+        name: "",
+        difficulty: 1,
+        duration: "",
+        season: "Verano",
+        countries: [],
+        countriesSearchbar: "",
+      })
+      dispatch(setCountries(""))
+    } catch (error) {
+      alert(error.response?.data?.error);
+      console.error(error);
+    }
+  };
 
   const handleSeason = (season) => {
-    setIsPressed(season)
-  }
+    setActivityData({ ...activityData, season });
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    setActivityData({ ...activityData, [name]: value });
+    const newData = { [name]: value };
+    setActivityData({ ...activityData, ...newData });
+    setErrors({ ...validate(newData, activityData.countries) });
+  };
+
+  const handleKeyPress = async (event) => {
+    const { key } = event;
+    if (key === "Backspace" && !activityData.countriesSearchbar.length)
+      return removeCountry(activityData.countries.length - 1);
+    if (key === "Enter") {
+      event.preventDefault();
+      const { data } = await axios.get(
+        `http://localhost:3001/countries/${activityData.countriesSearchbar.toUpperCase()}`
+      );
+      const { image, id } = data;
+      setActivityData({
+        ...activityData,
+        countriesSearchbar: "",
+        countries: [...activityData.countries, { image, id }],
+      });
+    }
+  };
+
+  const removeCountry = (index) => {
+    const filteredCountries = [...activityData.countries];
+    filteredCountries.splice(index, 1);
+    setActivityData({ ...activityData, countries: filteredCountries });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    const errorsHandler = validate(activityData, activityData.countries);
+    const errorsArray = Object.keys(errorsHandler);
+    console.log(errorsArray);
+    if (errorsArray.length)
+      return alert("Errors found, please fix them and try again!");
+
+    createActivity(activityData);
   };
 
   return (
@@ -91,71 +171,89 @@ const FormComponent = () => {
           <div className={styles.seasonEmojis}>
             <span
               className={`${styles.season} ${
-                isPressed === "summer" ? styles.isSummer : styles.isNotSummer
+                activityData.season === "Verano"
+                  ? styles.isSummer
+                  : styles.isNotSummer
               }`}
-              onClick={() => handleSeason("summer")}
+              onClick={() => handleSeason("Verano")}
             >
               <i
                 className="fa-solid fa-sun"
-                onClick={() => handleSeason("summer")}
+                onClick={() => handleSeason("Verano")}
               />
             </span>
             <span
               className={`${styles.season} ${
-                isPressed === "autumn" ? styles.isAutumn : styles.isNotAutumn
+                activityData.season === "Otoño"
+                  ? styles.isAutumn
+                  : styles.isNotAutumn
               }`}
-              onClick={() => handleSeason("autumn")}
+              onClick={() => handleSeason("Otoño")}
             >
               <i
                 className="fa-brands fa-canadian-maple-leaf"
-                onClick={() => handleSeason("autumn")}
+                onClick={() => handleSeason("Otoño")}
               />
             </span>
             <span
               className={`${styles.season} ${
-                isPressed === "winter" ? styles.isWinter : styles.isNotWinter
+                activityData.season === "Invierno"
+                  ? styles.isWinter
+                  : styles.isNotWinter
               }`}
-              onClick={() => handleSeason("winter")}
+              onClick={() => handleSeason("Invierno")}
             >
               <i
                 className="fa-regular fa-snowflake"
-                onClick={() => handleSeason("winter")}
+                onClick={() => handleSeason("Invierno")}
               />
             </span>
             <span
               className={`${styles.season} ${
-                isPressed === "spring" ? styles.isSpring : styles.isNotSpring
+                activityData.season === "Primavera"
+                  ? styles.isSpring
+                  : styles.isNotSpring
               }`}
-              onClick={() => handleSeason("spring")}
+              onClick={() => handleSeason("Primavera")}
             >
               <i
                 className="fa-solid fa-seedling"
-                onClick={() => handleSeason("spring")}
+                onClick={() => handleSeason("Primavera")}
               />
             </span>
           </div>
-          {/* <input
-            className={styles.input}
-            type="text"
-            name="season"
-            placeholder="Write the season of the Activity"
-            value={activityData.season}
-            onChange={handleChange}
-          /> */}
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="countries" className={styles.label}>
             Add to Countries
           </label>
-          <input
-            className={styles.input}
-            type="text"
-            name="countries"
-            placeholder="Write the countries to add this activity to"
-            value={activityData.countries}
-            onChange={handleChange}
-          />
+          <div className={styles.countriesContainer}>
+            {activityData.countries.map((country, index) => (
+              <span key={index} className={styles.country}>
+                <img src={country.image} alt={country.id} />
+                <p>{country.id}</p>
+                <span onClick={() => removeCountry(index)}>X</span>
+              </span>
+            ))}
+            <input
+              className={styles.inputCountry}
+              type="text"
+              name="countriesSearchbar"
+              placeholder={
+                activityData.countries.length
+                  ? ""
+                  : "Write the countries to add this activity to"
+              }
+              value={activityData.countriesSearchbar}
+              autoComplete="off"
+              onChange={handleChange}
+              onKeyDown={handleKeyPress}
+            />
+          </div>
         </div>
+        <button type="submit" className={styles.submit}>
+          CREATE ACTIVITY
+        </button>
       </form>
     </div>
   );

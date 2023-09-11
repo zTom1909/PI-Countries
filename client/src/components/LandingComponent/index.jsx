@@ -2,8 +2,8 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import validate from "../../resources/functions/validate";
-import { setAccess } from "../../redux/actions";
+import validate from "../../resources/functions/accessValidate";
+import { setEmail, setAccess } from "../../redux/actions";
 import styles from "./LandingComponent.module.css";
 
 const LandingComponent = () => {
@@ -36,6 +36,7 @@ const LandingComponent = () => {
         email,
         password,
       });
+      dispatch(setEmail(email))
       dispatch(setAccess(true));
       navigate("/home");
     } catch (error) {
@@ -46,6 +47,7 @@ const LandingComponent = () => {
   const login = async ({ email, password }) => {
     try {
       await axios.get(`http://localhost:3001/users/login/?email=${email}&password=${password}`);
+      dispatch(setEmail(email))
       dispatch(setAccess(true));
       navigate("/home");
     } catch (error) {

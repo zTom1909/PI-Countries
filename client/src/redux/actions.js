@@ -1,5 +1,10 @@
-import { SET_COUNTRIES, FILTER_COUNTRIES, ORDER_COUNTRIES, SET_ACCESS } from "./types";
+import { SET_COUNTRIES, FILTER_COUNTRIES, ORDER_COUNTRIES, SET_ACCESS, SET_EMAIL } from "./types";
 import axios from "axios";
+
+export const setEmail = (email) => ({
+  type: SET_EMAIL,
+  payload: email
+})
 
 export const setAccess = (access) => ({
   type: SET_ACCESS,
