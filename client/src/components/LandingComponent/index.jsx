@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import validate from "../../resources/functions/accessValidate";
-import { setEmail, setAccess } from "../../redux/actions";
+import { setEmail, setAccess, setCountries } from "../../redux/actions";
 import styles from "./LandingComponent.module.css";
 
 const LandingComponent = () => {
@@ -36,8 +36,9 @@ const LandingComponent = () => {
         email,
         password,
       });
-      dispatch(setEmail(email))
+      dispatch(setEmail(email));
       dispatch(setAccess(true));
+      dispatch(setCountries("", email));
       navigate("/home");
     } catch (error) {
       alert(error.response.data.error);
@@ -46,9 +47,12 @@ const LandingComponent = () => {
   };
   const login = async ({ email, password }) => {
     try {
-      await axios.get(`http://localhost:3001/users/login/?email=${email}&password=${password}`);
-      dispatch(setEmail(email))
+      await axios.get(
+        `http://localhost:3001/users/login/?email=${email}&password=${password}`
+      );
+      dispatch(setEmail(email));
       dispatch(setAccess(true));
+      dispatch(setCountries("", email));
       navigate("/home");
     } catch (error) {
       alert(error.response.data.error);
@@ -82,7 +86,7 @@ const LandingComponent = () => {
       password: userData.password.data,
       isRegister: userData.isRegister,
     });
-    setUserData({ ...userData, ...errorHandler });
+    setUserData(errorHandler);
 
     const errorsArray = Object.values(errorHandler).filter((value, index) => {
       if (index === 0) return false;
@@ -153,7 +157,7 @@ const LandingComponent = () => {
         >
           <i className="fa-regular fa-circle-xmark" />
         </span>
-        {userData.email.error.length ? (
+        {userData.email.error?.length ? (
           <span className={styles.warning}>
             <i className="fa-solid fa-circle-exclamation" />
             <span className={styles.bubble}>{userData.email.error}</span>
@@ -200,7 +204,7 @@ const LandingComponent = () => {
             onClick={() => handleVisibility("password")}
           />
         </span>
-        {userData.password.error.length ? (
+        {userData.password.error?.length ? (
           <span className={styles.warning}>
             <i className="fa-solid fa-circle-exclamation" />
             <span className={styles.bubble}>{userData.password.error}</span>
@@ -250,7 +254,7 @@ const LandingComponent = () => {
               onClick={() => handleVisibility("confirmPassword")}
             />
           </span>
-          {userData.confirmPassword.error.length ? (
+          {userData.confirmPassword.error?.length ? (
             <span className={styles.warning}>
               <i className="fa-solid fa-circle-exclamation" />
               <span className={styles.bubble}>
@@ -287,7 +291,10 @@ const LandingComponent = () => {
           type="submit"
           name="guest"
           className={styles.submit}
-          onClick={() => navigate("/home")}
+          onClick={() => {
+            dispatch(setCountries(""));
+            navigate("/home");
+          }}
         >
           LOGIN AS GUEST
         </button>

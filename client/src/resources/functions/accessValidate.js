@@ -2,14 +2,16 @@ const validate = ({ oldData, input, password, isRegister }) => {
   const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
   const regexPassword = /^.*[0-9].*/;
   let dataObject = {
-    email: {},
-    password: {},
-    confirmPassword: {},
+    ...oldData,
+    email: { data: oldData.email?.data ?? "" },
+    password: { data: oldData.password?.data ?? "" },
+    confirmPassword: { data: oldData.confirmPassword?.data ?? "" },
     other: {},
   };
   Object.keys(input).forEach((field) => {
-    const value = input[field];
-    dataObject = { ...oldData, [field]: { data: value } };
+    const value = input[field] ?? "";
+    dataObject[field] = { data: value };
+
     switch (field) {
       case "email":
         if (!value) dataObject.email.error = "Email must not be empty";

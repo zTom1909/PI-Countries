@@ -11,10 +11,10 @@ export const setAccess = (access) => ({
   payload: access
 })
 
-export const setCountries = (searchInput) => async (dispatch) => {
+export const setCountries = (searchInput, email) => async (dispatch) => {
   try {
     const { data } = await axios.get(
-      `http://localhost:3001/countries?name=${searchInput}`
+      `http://localhost:3001/countries?name=${searchInput}&email=${email}`
     );
     return dispatch({
       type: SET_COUNTRIES,

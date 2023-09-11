@@ -42,12 +42,20 @@
 
 .label {
   font-size: larger;
+  margin-bottom: 5px;
+}
+
+.inputField {
+  width: 250px;
+  display: flex;
+  position: relative;
+  align-items: center;
 }
 
 .input,
 .inputCountry {
   height: 25px;
-  margin-top: 5px;
+  width: 250px;
   background-color: #a8dbcab7;
   color: rgb(3, 34, 3);
   text-indent: 10px;
@@ -129,6 +137,50 @@
   background-color: #263d35b7;
 }
 
+.warning {
+  height: 40px;
+  width: 40px;
+  right: -40px;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  color: goldenrod;
+}
+
+.bubble,
+.pointer {
+  opacity: 0;
+}
+
+.warning:hover .bubble,
+.warning:hover .pointer {
+  opacity: 1;
+}
+
+.bubble {
+  top: -28px;
+  left: 8px;
+  padding: 5px;
+  position: absolute;
+  background-color: rgb(15, 15, 15);
+  border-radius: 6px;
+  overflow: hidden;
+  font-size: small;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.pointer {
+  height: 20px;
+  width: 20px;
+  left: 12px;
+  bottom: 39px;
+  position: absolute;
+  transform: rotate(45deg);
+  background-color: rgba(15, 15, 15, 0.918);
+  z-index: 1;
+}
 
 .submit {
   padding: 10px;
@@ -155,6 +207,7 @@
 
 .slider {
   width: 140px;
+  margin-right: 15px;
   background-color: transparent;
 }
 
@@ -176,18 +229,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  filter: drop-shadow(1px 1px 2px black);
 }
 
 .difficultyValue {
   margin-right: 4px;
   font-weight: 700;
   font-size: large;
-  filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.521));
-}
-
-.difficultyStar {
-  /* color: goldenrod; */
-  filter: drop-shadow(1px 1px 2px black);
 }
 
 .dif1 {

@@ -7,7 +7,7 @@ import styles from "./FormComponent.module.css";
 
 const FormComponent = () => {
   const email = useSelector((state) => state.email);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [activityData, setActivityData] = useState({
     name: "",
@@ -18,20 +18,19 @@ const FormComponent = () => {
     countriesSearchbar: "",
   });
 
-  const [, setErrors] = useState({
+  const [errors, setErrors] = useState({
     name: "",
     duration: "",
-    countries: "",
+    countriesSearchbar: "",
   });
 
   const createActivity = async (data) => {
     try {
-      if (!email) return alert("You need an account to create activities!")
+      if (!email) return alert("You need an account to create activities!");
       const durationArray = data.duration.split(":");
       const fixedDuration =
         Number(durationArray[0]) * 60 + Number(durationArray[1]);
       const fixedIds = data.countries.map((country) => country.id).join(",");
-      console.log(fixedDuration);
       await axios.post(
         `http://localhost:3001/activities?id=${fixedIds}&email=${email}`,
         {
@@ -49,8 +48,8 @@ const FormComponent = () => {
         season: "Verano",
         countries: [],
         countriesSearchbar: "",
-      })
-      dispatch(setCountries(""))
+      });
+      dispatch(setCountries("", email));
     } catch (error) {
       alert(error.response?.data?.error);
       console.error(error);
@@ -83,6 +82,7 @@ const FormComponent = () => {
         countriesSearchbar: "",
         countries: [...activityData.countries, { image, id }],
       });
+      setErrors({ ...errors, countriesSearchbar: "" });
     }
   };
 
@@ -96,8 +96,8 @@ const FormComponent = () => {
     event.preventDefault();
 
     const errorsHandler = validate(activityData, activityData.countries);
+    setErrors(errorsHandler)
     const errorsArray = Object.keys(errorsHandler);
-    console.log(errorsArray);
     if (errorsArray.length)
       return alert("Errors found, please fix them and try again!");
 
@@ -112,14 +112,25 @@ const FormComponent = () => {
           <label htmlFor="name" className={styles.label}>
             Activity Name
           </label>
-          <input
-            className={styles.input}
-            type="text"
-            name="name"
-            placeholder="Write the name of the Activity"
-            value={activityData.name}
-            onChange={handleChange}
-          />
+          <div className={styles.inputField}>
+            <input
+              className={styles.input}
+              type="text"
+              name="name"
+              placeholder="Write the name of the Activity"
+              value={activityData.name}
+              onChange={handleChange}
+            />
+            {errors.name?.length ? (
+              <span className={styles.warning}>
+                <i className="fa-solid fa-circle-exclamation" />
+                <span className={styles.bubble}>{errors.name}</span>
+                <span className={styles.pointer} />
+              </span>
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="difficulty" className={styles.label}>
@@ -154,14 +165,25 @@ const FormComponent = () => {
                 onChange={handleChange}
               />
             </div>
-            <input
-              className={styles.duration}
-              type="text"
-              name="duration"
-              placeholder="10:00"
-              value={activityData.duration}
-              onChange={handleChange}
-            />
+            <div className={styles.inputField}>
+              <input
+                className={styles.duration}
+                type="text"
+                name="duration"
+                placeholder="10:00"
+                value={activityData.duration}
+                onChange={handleChange}
+              />
+              {errors.duration?.length ? (
+                <span className={styles.warning}>
+                  <i className="fa-solid fa-circle-exclamation" />
+                  <span className={styles.bubble}>{errors.duration}</span>
+                  <span className={styles.pointer} />
+                </span>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </div>
         <div className={styles.seasonContainer}>
@@ -227,28 +249,41 @@ const FormComponent = () => {
           <label htmlFor="countries" className={styles.label}>
             Add to Countries
           </label>
-          <div className={styles.countriesContainer}>
-            {activityData.countries.map((country, index) => (
-              <span key={index} className={styles.country}>
-                <img src={country.image} alt={country.id} />
-                <p>{country.id}</p>
-                <span onClick={() => removeCountry(index)}>X</span>
+          <div className={styles.inputField}>
+            <div className={styles.countriesContainer}>
+              {activityData.countries.map((country, index) => (
+                <span key={index} className={styles.country}>
+                  <img src={country.image} alt={country.id} />
+                  <p>{country.id}</p>
+                  <span onClick={() => removeCountry(index)}>X</span>
+                </span>
+              ))}
+              <input
+                className={styles.inputCountry}
+                type="text"
+                name="countriesSearchbar"
+                placeholder={
+                  activityData.countries.length
+                    ? ""
+                    : "Write the countries to add this activity to"
+                }
+                value={activityData.countriesSearchbar}
+                autoComplete="off"
+                onChange={handleChange}
+                onKeyDown={handleKeyPress}
+              />
+            </div>
+            {errors.countriesSearchbar?.length ? (
+              <span className={styles.warning}>
+                <i className="fa-solid fa-circle-exclamation" />
+                <span className={styles.bubble}>
+                  {errors.countriesSearchbar}
+                </span>
+                <span className={styles.pointer} />
               </span>
-            ))}
-            <input
-              className={styles.inputCountry}
-              type="text"
-              name="countriesSearchbar"
-              placeholder={
-                activityData.countries.length
-                  ? ""
-                  : "Write the countries to add this activity to"
-              }
-              value={activityData.countriesSearchbar}
-              autoComplete="off"
-              onChange={handleChange}
-              onKeyDown={handleKeyPress}
-            />
+            ) : (
+              <></>
+            )}
           </div>
         </div>
         <button type="submit" className={styles.submit}>
