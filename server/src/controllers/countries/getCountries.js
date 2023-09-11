@@ -2,9 +2,9 @@ const getCountriesHandler = require("../../handlers/countries/getCountries");
 const translation = require("../../translations/en.json");
 
 const getCountries = async (req, res) => {
-  const { name, page } = req.query;
+  const { name, page, email } = req.query;
   try {
-    const countries = await getCountriesHandler(name, page);
+    const countries = await getCountriesHandler(name, page, email);
     res.status(200).json(countries);
   } catch (error) {
     res

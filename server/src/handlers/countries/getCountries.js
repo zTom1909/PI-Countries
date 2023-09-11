@@ -1,10 +1,16 @@
 const { Op } = require("sequelize");
-const { Country, Activity } = require("../../db");
+const { Country, Activity, User } = require("../../db");
 
-module.exports = async (name, page) => {
+module.exports = async (name, page, email) => {
   const includeArray = [
     {
       model: Activity,
+      include: [
+        {
+          model: User,
+          where: { email }
+        }
+      ],
       attributes: ["id", "name", "difficulty", "season"],
       through: {
         attributes: [],
@@ -16,9 +22,7 @@ module.exports = async (name, page) => {
     include: includeArray,
   });
   if (!name)
-    return page
-      ? allCountries.slice(page * 10 - 10, page * 10)
-      : allCountries;
+    return page ? allCountries.slice(page * 10 - 10, page * 10) : allCountries;
 
   const filteredCountries = await Country.findAll({
     where: {
