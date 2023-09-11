@@ -34,8 +34,11 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { Country, Activity } = sequelize.models;
+const { Country, Activity, User } = sequelize.models;
 
+
+Activity.belongsToMany(User, { through: "UserActivity" });
+User.belongsToMany(Activity, { through: "UserActivity" });
 Country.belongsToMany(Activity, { through: "CountryActivity" });
 Activity.belongsToMany(Country, { through: "CountryActivity" });
 

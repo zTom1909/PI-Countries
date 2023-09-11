@@ -1,4 +1,4 @@
-const { Activity, Country } = require("../../db");
+const { User, Activity, Country } = require("../../db");
 
 module.exports = async () => {
   return await Activity.findAll({
@@ -14,6 +14,16 @@ module.exports = async () => {
           "capitalCity",
           "area",
           "population",
+        ],
+        through: {
+          attributes: [],
+        },
+      },
+      {
+        model: User,
+        attributes: [
+          "id",
+          "email",
         ],
         through: {
           attributes: [],
