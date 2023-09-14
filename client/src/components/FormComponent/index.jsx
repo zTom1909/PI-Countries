@@ -73,10 +73,14 @@ const FormComponent = () => {
       return removeCountry(activityData.countries.length - 1);
     if (key === "Enter") {
       event.preventDefault();
-      if (!activityData.countriesSearchbar) return
+      if (!activityData.countriesSearchbar) return;
       const { data } = await axios.get(
         `http://localhost:3001/countries/${activityData.countriesSearchbar.toUpperCase()}`
       );
+      if (!data?.id) {
+        setActivityData({ ...activityData, countriesSearchbar: "" })
+        return alert("Country not found!");
+      }
       const { image, id } = data;
       setActivityData({
         ...activityData,
@@ -97,7 +101,7 @@ const FormComponent = () => {
     event.preventDefault();
 
     const errorsHandler = validate(activityData, activityData.countries);
-    setErrors(errorsHandler)
+    setErrors(errorsHandler);
     const errorsArray = Object.keys(errorsHandler);
     if (errorsArray.length)
       return alert("Errors found, please fix them and try again!");
