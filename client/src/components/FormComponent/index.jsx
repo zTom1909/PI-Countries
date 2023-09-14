@@ -73,6 +73,7 @@ const FormComponent = () => {
       return removeCountry(activityData.countries.length - 1);
     if (key === "Enter") {
       event.preventDefault();
+      if (!activityData.countriesSearchbar) return
       const { data } = await axios.get(
         `http://localhost:3001/countries/${activityData.countriesSearchbar.toUpperCase()}`
       );

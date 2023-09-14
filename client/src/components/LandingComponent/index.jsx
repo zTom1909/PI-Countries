@@ -292,7 +292,7 @@ const LandingComponent = () => {
           name="guest"
           className={styles.submit}
           onClick={() => {
-            dispatch(setCountries(""));
+            dispatch(setCountries("", ""));
             navigate("/home");
           }}
         >

@@ -77,11 +77,11 @@
   color: rgb(100, 9, 9);
 }
 
-.inputContainer:focus-within .clearInput,
+/* .inputContainer:focus-within .clearInput,
 .inputContainer:focus-within .clearInputPassword {
   opacity: 1;
   pointer-events: auto;
-}
+} */
 .warning {
   height: 40px;
   width: 40px;
@@ -196,7 +196,7 @@ input:-webkit-autofill:active {
   left: 8px;
   padding: 5px;
   position: absolute;
-  background-color: rgba(15, 15, 15, 0.918);
+  background-color: rgba(15, 15, 15);
   border-radius: 6px;
   overflow: hidden;
   font-size: small;
